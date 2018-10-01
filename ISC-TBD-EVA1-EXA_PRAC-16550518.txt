@@ -1,0 +1,1820 @@
+
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 13
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > create database tecnologico;
+Query OK, 1 row affected (0.1215 sec)
+
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tecnologico        |
+| world              |
++--------------------+
+8 rows in set (0.0008 sec)
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico
+Default schema set to `tecnologico`.
+Fetching table and column names from `tecnologico` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table alumnos(
+                                           ... No_Crtl int not null primary key auto_increment,
+                                           ... Nombre varchar(50) not null,
+                                           ... Apellido_Pat varachar(50),
+                                           ... Apellido_Mat varchar(50),
+                                           ... Semestre_actual int,
+                                           ... Carrera varchar(50) enum('I.S.C','I.I', 'I.D.I', 'I.F', 'I.G.E', 'Administracion', 'Arquitectura'),
+                                           ... Direccion varchar(50),
+                                           ... Tel varchar(10),
+                                           ... Cel varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varachar(50),
+Apellido_Mat varchar(50),
+Semestre_actual int,
+Carrera varchar(50)' at line 4
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table alumnos( No_Crtl int not null primary key auto_increment, Nombre varchar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Semestre_actual int enum(1,2,3,4,5,6,7,8,9,10,11,12,13), Carrera varchar(50) enum('I.S.C','I.I', 'I.D.I', 'I.F', 'I.G.E', 'Administracion', 'Arquitectura'), Direccion varchar(50), Tel varchar(10),  Cel varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'enum(1,2,3,4,5,6,7,8,9,10,11,12,13), Carrera varchar(50) enum('I.S.C','I.I', 'I.' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table alumnos( No_Crtl int not null primary key auto_increment, Nombre varchar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Semestre_actual enum(1,2,3,4,5,6,7,8,9,10,11,12,13), Carrera enum('I.S.C','I.I', 'I.D.I', 'I.F', 'I.G.E', 'Administracion', 'Arquitectura'), Direccion varchar(50), Tel varchar(10),  Cel varchar(10));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,2,3,4,5,6,7,8,9,10,11,12,13), Carrera enum('I.S.C','I.I', 'I.D.I', 'I.F', 'I.G' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table alumnos( No_Crtl int not null primary key auto_increment, Nombre varchar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Semestre_actual enum('1','2','3','4','5','6','7','8','9','10','11','12','13'), Carrera enum('I.S.C','I.I', 'I.D.I', 'I.F', 'I.G.E', 'Administracion', 'Arquitectura'), Direccion varchar(50), Tel varchar(10),  Cel varchar(10));
+Query OK, 0 rows affected (0.1116 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                                      | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                                   | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                               | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                               | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                               | YES  |     | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13')             | YES  |     | NULL    |                |
+| Carrera         | enum('I.S.C','I.I','I.D.I','I.F','I.G.E','Administracion','Arquitectura') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                               | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                               | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                               | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0026 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table carreras(
+                                           ... No_Materia int primary key not null auto_increment,
+                                           ... )
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 3
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table carreras(
+                                           ... No_Carrera int primary key not null auto_increment,
+                                           ... No_Materia int,
+                                           ... No_Sementres int,
+                                           ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table carreras( No_Carrera int primary key not null auto_increment, No_Materia int, No_Sementres int );
+Query OK, 0 rows affected (0.0544 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table materias(
+                                           ... No_Materia primary key not null auto_increment,
+                                           ... Creditos int,
+                                           ... Hr_Teoricas int,
+                                           ... Hr_Practicas int,
+                                           ... Semestre int);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key not null auto_increment,
+Creditos int,
+Hr_Teoricas int,
+Hr_Practicas' at line 2
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table materias( No_Materia int primary key not null auto_increment, Creditos int, Hr_Teoricas int, Hr_Practicas int, Semestre int);
+Query OK, 0 rows affected (0.0345 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > Create table empleados(
+                                           ... No_Empleado int primary key not null auto_increment,
+                                           ... Nombre varachar(50) not null,
+                                           ... Apellido_Pat varchar(50),
+                                           ... Apellido_Mat varchar(50),
+                                           ... Direccion varchar(100),
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varachar(50) not null,
+Apellido_Pat varchar(50),
+Apellido_Mat varchar(50),
+Direc' at line 3
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > Create table empleados( No_Empleado int primary key not null auto_increment, Nombre varachar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Direccion varchar(100),
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varachar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Direc' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > Create table empleados( No_Empleado int primary key not null auto_increment, Nombre varchar(50) not null, Apellido_Pat varchar(50), Apellido_Mat varchar(50), Direccion varchar(100),
+                                           ... No_plazas int,
+                                           ... Hr_Trabajo int,
+                                           ... Tipo_empleado enum('Docente','Soporte'),
+                                           ... Email varchar(50),
+                                           ... Fecha_Nacimiento date);
+Query OK, 0 rows affected (0.0519 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table docente(
+                                           ... No_empleado int,
+                                           ... Departamento enum('Sistemas y Computacion','Ciencias Basicas','Ingenieria Industrial','Ciencias de la Tierra',
+                                           ... 'Estudios de posgrado e investigacion','Ciencias Economico Administrativas'),
+                                           ... Carrera varchar(100),
+                                           ... Posgrado enum('Maestria', 'Doctorado');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 6
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table docente( No_empleado int, Departamento enum('Sistemas y Computacion','Ciencias Basicas','Ingenieria Industrial','Ciencias de la Tierra', 'Estudios de posgrado e investigacion','Ciencias Economico Administrativas'), Carrera varchar(100), Posgrado enum('Maestria', 'Doctorado'));
+Query OK, 0 rows affected (0.1632 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables,
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| carreras              |
+| docente               |
+| empleados             |
+| materias              |
++-----------------------+
+5 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table empleado_soporte(
+                                           ... No_Empleado int,
+                                           ... Departamento('Division de estudios', 'Recursos Humanos', 'Financieros', 'Servicios Escolares', 'Centro de Informacion',
+                                           ... 'Centro de Computo','Comunicacion y Difusion', 'Mantenimiento', 'Gestion Tecnologica y Vinculacion',
+                                           ... 'Actividades Extraescolares', 'Planeacion, programacion y presupuestacion','Recursos Materiales y Servicios Generales',
+                                           ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('Division de estudios', 'Recursos Humanos', 'Financieros', 'Servicios Escolares' at line 3
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table empleado_soporte( No_Empleado int, Departamento enum('Division de estudios', 'Recursos Humanos', 'Financieros', 'Servicios Escolares', 'Centro de Informacion', 'Centro de Computo','Comunicacion y Difusion', 'Mantenimiento', 'Gestion Tecnologica y Vinculacion', 'Actividades Extraescolares', 'Planeacion, programacion y presupuestacion','Recursos Materiales y Servicios Generales'),
+                                           ... Carrera varchar(100),
+                                           ... Posgrado ('Maestria', 'Doctorado'));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('Maestria', 'Doctorado'))' at line 3
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table empleado_soporte( No_Empleado int, Departamento enum('Division de estudios', 'Recursos Humanos', 'Financieros', 'Servicios Escolares', 'Centro de Informacion', 'Centro de Computo','Comunicacion y Difusion', 'Mantenimiento', 'Gestion Tecnologica y Vinculacion', 'Actividades Extraescolares', 'Planeacion, programacion y presupuestacion','Recursos Materiales y Servicios Generales'),  Carrera varchar(100), Posgrado enum ('Maestria', 'Doctorado'));
+Query OK, 0 rows affected (0.1397 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table calificaciones(
+                                           ... No_Ctrl int,
+                                           ... No_Materia int,
+                                           ... Calif float,
+                                           ... No_Empleado int);
+Query OK, 0 rows affected (0.0547 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table horario(
+                                           ... No_Ctrl int,
+                                           ... No_Materia int,
+                                           ... No_Empleado int,
+                                           ... Hora time,
+                                           ... Dias enum('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'));
+Query OK, 0 rows affected (0.1003 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables,
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| docente               |
+| empleado_soporte      |
+| empleados             |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc carreras;
++--------------+---------+------+-----+---------+----------------+
+| Field        | Type    | Null | Key | Default | Extra          |
++--------------+---------+------+-----+---------+----------------+
+| No_Carrera   | int(11) | NO   | PRI | NULL    | auto_increment |
+| No_Materia   | int(11) | YES  |     | NULL    |                |
+| No_Sementres | int(11) | YES  |     | NULL    |                |
++--------------+---------+------+-----+---------+----------------+
+3 rows in set (0.0022 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > alter table carreras add Nombre enum('I.S.C', 'I.D.I','I.I','I.G.E','I.F','Administracion', 'Arquitectura');
+Query OK, 0 rows affected (0.0478 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 52
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tecnologico        |
+| world              |
++--------------------+
+8 rows in set (0.0009 sec)
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico
+Default schema set to `tecnologico`.
+Fetching table and column names from `tecnologico` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+7 rows in set (0.0013 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos
+                                           ... ;
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                                      | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                                   | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                               | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                               | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                               | YES  |     | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13')             | YES  |     | NULL    |                |
+| Carrera         | enum('I.S.C','I.I','I.D.I','I.F','I.G.E','Administracion','Arquitectura') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                               | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                               | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                               | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc carrera;
+ERROR: 1146 (42S02): Table 'tecnologico.carrera' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc carreras;
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                                      | Null | Key | Default | Extra          |
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_Carrera   | int(11)                                                                   | NO   | PRI | NULL    | auto_increment |
+| No_Materia   | int(11)                                                                   | YES  |     | NULL    |                |
+| No_Sementres | int(11)                                                                   | YES  |     | NULL    |                |
+| Nombre       | enum('I.S.C','I.D.I','I.I','I.G.E','I.F','Administracion','Arquitectura') | YES  |     | NULL    |                |
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+4 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > alter table alumnos modify carrera int after Apellido_Mat;
+Query OK, 0 rows affected (0.1525 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                          | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                   | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| carrera         | int(11)                                                       | YES  |     | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                   | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                   | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                   | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > alter table alumnos modify Carrera int after Apellido_Mat;
+Query OK, 0 rows affected (0.0733 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                          | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                   | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Carrera         | int(11)                                                       | YES  |     | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                   | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                   | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                   | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > alter table alumnos add foreign key Carrera references carreras No_Carrera;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references carreras No_Carrera' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > alter table alumnos add foreign key (Carrera) references carreras (No_Carrera);
+Query OK, 0 rows affected (0.1031 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create table directorio(
+                                           ... Nombre varchar(70),
+                                           ... No_Tel varchar(10),
+                                           ... Departamento varchar(70));
+Query OK, 0 rows affected (0.0442 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into directorio(Nombre, No_Tel, Departamento) values(
+                                           ... 'Lic. Gabriel Salazar Hernandez', 442-50-00, 'Director del Tecnologico),
+                                           ... ('Dra. Luisa Yolanda Quiñones Montenegro', 442-50-11, ' Jefa del depto de planeacion, programacion y presupuestacion),
+                                           ... ('L.E.F. Francisco Javier Aleman Escalante', '442-50-13', ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Dra. Luisa Yolanda Qui
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'Lic. Gabriel Salazar Hernandez', '442-50-00', 'Director del Tecnologico), ('Dra. Luisa Yolanda Quiñones Montenegro', '442-50-11', ' Jefa del depto de planeacion, programacion y presupuestacion), ('L.E.F. Francisco Javier Aleman Escalante', '442-50-13','Jefe dept de Actividades Extraescolares'),
+                                           ... ('L.S.C.A. Margarita Ramirez Chong', '442-50-44','Jefa del depto de Gestion Tecnologica y Vinculacion'),
+                                           ... ('M.A.R.H. Jaqueline Hernandez Alarcon','442-50-16',
+                                           ... 'Jefa del depto de Comunicacion y Difusion'),
+                                           ... ('M.S.E. Luz Maria Zapata Carrasco', '442-50-26',
+                                           ... 'Jefa depto de Centro de Informacion'),
+                                           ... ('Ing. Silvia Nolasco Cardona', '442-50-09',
+                                           ... 'Jefa del depto de Servicios Escolares'),
+                                           ... insert into directorio(Nombre, No_Tel, Departamento) values( 'Lic. Gabriel Salazar Hernandez', '442-50-00', 'Director del Tecnologico), ('Dra. Luisa Yolanda Quiñones Montenegro', '442-50-11', ' Jefa del depto de planeacion, programacion y presupuestacion), ('L.E.F. Francisco Javier Aleman Escalante', '442-50-13','Jefe dept de Actividades Extraescolares'), ('L.S.C.A. Margarita Ramirez Chong', '442-50-44','Jefa del depto de Gestion Tecnologica y Vinculacion'), ('M.A.R.H. Jaqueline Hernandez Alarcon','442-50-16', 'Jefa del depto de Comunicacion y Difusion'), ('M.S.E. Luz Maria Zapata Carrasco', '442-50-26', 'Jefa depto de Centro de Informacion'), ('Ing. Silvia Nolasco Cardona', '442-50-09', 'Jefa del depto de Servicios Escolares'), ('Ing. Gerardo Ceniceros Reyes', '442-50-03', 'Subdirector de Servicios Administrativos'), ('C.P. Cinthya Paola Aranda Gomez','442-50-19', 'Jefa depto de Financieros'), ('M.A.R.H Amalia Delia Medina Tarin','442-50-10', 'Jefa depto de Recursos Humanos'), ('L.R.I. Manuela Campos Sandoval', '442-50-22', 'Jefe depto de Recursos Materiales y Servicios Generales');resupuestacion), ('L.E.F. Francisco Javier Aleman Escalan
+te', '442-50-13','Jefe dept de Actividades Extraescolares'), ('L.S.C.A. Margarita Ramirez Chong', '442-50-44','Jefa del depto de Gestion Tecnologica y Vinculacion'), ('M.A.
+ MySQL  localhost:3306 ssl  tecnologico  SQL > 'Jefa del depto de Comunicacion y Difusion'), ('M.S.E. Luz Maria Zapata Carrasco', '442-50-26', 'Jefa depto de Centro de Info
+ MySQL  localhost:3306 ssl  tecnologico  SQL > -50-09', 'Jefa del depto de Servicios Escolares'), ('Ing. Gerardo Ceniceros Reyes', '442-50-03', 'Subdirector de Servicios Ad
+ MySQL  localhost:3306 ssl  tecnologico  SQL > mez','442-50-19', 'Jefa depto de Financieros'), ('M.A.R.H Amalia Delia Medina Tarin','442-50-10', 'Jefa depto de Recursos Hum
+ MySQL  localhost:3306 ssl  tecnologico  SQL > -50-22', 'Jefe depto de Recursos Materiales y Servicios Generales');resupuestacion), ('L.E.F. Francisco Javier Aleman Escalan
+ MySQL  localhost:3306 ssl  tecnologico  SQL > aescolares'), ('L.S.C.A. Margarita Ramirez Chong', '442-50-44','Jefa del depto de Gestion Tecnologica y Vinculacion'), ('M.A.
+ MySQL  localhost:3306 ssl  tecnologico  SQL > 'Jefa del depto de Comunicacion y Difusion'), ('M.S.E. Luz Maria Zapata Carrasco', '442-50-26', 'Jefa depto de Centro de Info
+ MySQL  localhost:3306 ssl  tecnologico  SQL > -50-09', 'Jefa del depto de Servicios Escolares'), ('Ing. Gerardo Ceniceros Reyes', '442-50-03', 'Subdirector de Servicios Ad
+ MySQL  localhost:3306 ssl  tecnologico  SQL > mez','442-50-19', 'Jefa depto de Financieros'), ('M.A.R.H Amalia Delia Medina Tarin','442-50-10', 'Jefa depto de Recursos Hum
+ MySQL  localhost:3306 ssl  tecnologico  SQL > -50-22', 'Jefe depto de Recursos Materiales y Servicios Generales');
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from directorio;
+Empty set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \conncet -c root@localhost
+ERROR: Not connected.
+
+          ... ;
+ERROR: Not connected.
+
+ MySQL  SQL > \?
+The Shell Help is organized in categories and topics. To get help for a
+specific category or topic use: \? <pattern>
+
+The <pattern> argument should be the name of a category or a topic.
+
+The pattern is a filter to identify topics for which help is required, it can
+use the following wildcards:
+
+- ? matches any single charecter.
+- * matches any character sequence.
+
+The following are the main help categories:
+
+ - Shell Commands Provides details about the available built-in shell commands.
+ - SQL Syntax     Entry point to retrieve syntax help on SQL statements.
+
+The available topics include:
+
+- The available shell commands.
+- Any word that is part of an SQL statement.
+
+SHELL COMMANDS
+
+The shell commands allow executing specific operations including updating the
+shell configuration.
+
+The following shell commands are available:
+
+ - \                   Start multi-line input when in SQL mode.
+ - \connect    (\c)    Connects the shell to a MySQL server and assigns the
+                       global session.
+ - \exit               Exits the MySQL Shell, same as \quit.
+ - \G                  Send command to mysql server, display result vertically.
+ - \g                  Send command to mysql server.
+ - \help       (\?,\h) Prints help information about a specific topic.
+ - \history            View and edit command line history.
+ - \js                 Switches to JavaScript processing mode.
+ - \nowarnings (\w)    Don't show warnings after every statement.
+ - \option             Allows working with the available shell options.
+ - \py                 Switches to Python processing mode.
+ - \quit       (\q)    Exits the MySQL Shell.
+ - \reconnect          Reconnects the global session.
+ - \rehash             Refresh the autocompletion cache.
+ - \source     (\.)    Loads and executes a script from a file.
+ - \sql                Switches to SQL processing mode.
+ - \status     (\s)    Print information about the current global session.
+ - \use        (\u)    Sets the active schema.
+ - \warnings   (\W)    Show warnings after every statement.
+
+EXAMPLES
+\? sql syntax
+      Displays the main SQL help categories.
+
+\? select
+      Displays information about the SELECT SQL statement.
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 14
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| Alumno           |
+| total_user       |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| solo_tabla       |
+| total_user       |
++------------------+
+8 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  SQL > \connect -c Alumno@127.0.0.3
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ********
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  SQL > \connect -c Alumno@127.0.0.3
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ***
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  SQL > create user 'Administrador'@'127.0.0.3' identified by 'admin';
+Query OK, 0 rows affected (0.1451 sec)
+
+ MySQL  localhost:3306 ssl  SQL > \connect -mc Alumno@127.0.0.3
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ********
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  SQL > \connect -mc Alumno@localhost
+Creating a Classic session to 'Alumno@localhost'
+Please provide the password for 'Alumno@localhost': ********
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  SQL > \?
+The Shell Help is organized in categories and topics. To get help for a
+specific category or topic use: \? <pattern>
+
+The <pattern> argument should be the name of a category or a topic.
+
+The pattern is a filter to identify topics for which help is required, it can
+use the following wildcards:
+
+- ? matches any single charecter.
+- * matches any character sequence.
+
+The following are the main help categories:
+
+ - Shell Commands Provides details about the available built-in shell commands.
+ - SQL Syntax     Entry point to retrieve syntax help on SQL statements.
+
+The available topics include:
+
+- The available shell commands.
+- Any word that is part of an SQL statement.
+
+SHELL COMMANDS
+
+The shell commands allow executing specific operations including updating the
+shell configuration.
+
+The following shell commands are available:
+
+ - \                   Start multi-line input when in SQL mode.
+ - \connect    (\c)    Connects the shell to a MySQL server and assigns the
+                       global session.
+ - \exit               Exits the MySQL Shell, same as \quit.
+ - \G                  Send command to mysql server, display result vertically.
+ - \g                  Send command to mysql server.
+ - \help       (\?,\h) Prints help information about a specific topic.
+ - \history            View and edit command line history.
+ - \js                 Switches to JavaScript processing mode.
+ - \nowarnings (\w)    Don't show warnings after every statement.
+ - \option             Allows working with the available shell options.
+ - \py                 Switches to Python processing mode.
+ - \quit       (\q)    Exits the MySQL Shell.
+ - \reconnect          Reconnects the global session.
+ - \rehash             Refresh the autocompletion cache.
+ - \source     (\.)    Loads and executes a script from a file.
+ - \sql                Switches to SQL processing mode.
+ - \status     (\s)    Print information about the current global session.
+ - \use        (\u)    Sets the active schema.
+ - \warnings   (\W)    Show warnings after every statement.
+
+EXAMPLES
+\? sql syntax
+      Displays the main SQL help categories.
+
+\? select
+      Displays information about the SELECT SQL statement.
+
+ MySQL  localhost:3306 ssl  SQL > grant all on tecnologico to 'Administrador'@'localhost';
+ERROR: 1046 (3D000): No database selected
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico
+Default schema set to `tecnologico`.
+Fetching table and column names from `tecnologico` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico to 'Administrador'@'localhost';
+ERROR: 1410 (42000): You are not allowed to create a user with GRANT
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.* to 'Administrador'@'localhost';
+ERROR: 1410 (42000): You are not allowed to create a user with GRANT
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user Administrador;
+ERROR: 1396 (HY000): Operation DROP USER failed for 'Administrador'@'%'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user Administrador@localhost;
+ERROR: 1396 (HY000): Operation DROP USER failed for 'Administrador'@'localhost'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Administrador'@'localhost';
+ERROR: 1396 (HY000): Operation DROP USER failed for 'Administrador'@'localhost'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| Administrador    |
+| Alumno           |
+| total_user       |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| solo_tabla       |
+| total_user       |
++------------------+
+9 rows in set (0.0011 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Administrador'@'127.0.0.3';
+Query OK, 0 rows affected (0.2160 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.3097 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1933 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3';
+ERROR: 1396 (HY000): Operation CREATE USER failed for 'Alumno'@'127.0.0.3'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.2115 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Alumno'@'127.0.0.3';
+ERROR: 1396 (HY000): Operation DROP USER failed for 'Alumno'@'127.0.0.3'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1568 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.* to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1585 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > \connect -c Alumno@127.0.0.3
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ****
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > \connect -mc Alumno@127.0.0.3
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ****
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > \connect --mysql Alumno@127.0.0.3
+Creating a Classic session to 'Alumno@127.0.0.3'
+Please provide the password for 'Alumno@127.0.0.3': ****
+MySQL Error 1045 (28000): Access denied for user 'Alumno'@'localhost' (using password: YES)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| Alumno           |
+| total_user       |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| solo_tabla       |
+| total_user       |
++------------------+
+8 rows in set (0.0012 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| docente               |
+| empleado_soporte      |
+| empleados             |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0098 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1226 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'maestro'@'127.0.0.3';
+ERROR: 1396 (HY000): Operation DROP USER failed for 'maestro'@'127.0.0.3'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.0776 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Maestro'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.2021 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.calificaciones to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1930 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Jefe'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1426 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.horario to 'Jefe'@'127.0.0.3';
+Query OK, 0 rows affected (0.1049 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.docente to 'Jefe'@'127.0.0.3';
+Query OK, 0 rows affected (0.1565 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.materias to 'Jefe'@'127.0.0.3';
+Query OK, 0 rows affected (0.1750 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1518 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3' identified '1234';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''1234'' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3' IDENTIFIED BY '1234':
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Alumno'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1447 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.Aulumno to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.2530 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.materias to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1839 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.horario to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1608 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Secretaria'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1792 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.empleados to 'Secretaria'@'127.0.0.3';
+Query OK, 0 rows affected (0.1317 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.empleado_soporte to 'Secretaria'@'127.0.0.3';
+Query OK, 0 rows affected (0.1537 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > create user 'Director'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.0769 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.empleados to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1357 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.empleado_soporte to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1665 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.docentes to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1851 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > drop user 'Jefe'@'127.0.0.3';
+Query OK, 0 rows affected (0.1291 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > Create user 'Jefe_depa'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.2220 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.empleados to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.0851 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.materias to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.0802 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > grant all on tecnologico.horario to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1366 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| Alumno           |
+| Director         |
+| Jefe_depa        |
+| Maestro          |
+| Secretaria       |
+| total_user       |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| solo_tabla       |
+| total_user       |
++------------------+
+12 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| docente               |
+| empleado_soporte      |
+| empleados             |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0028 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| eva_1              |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tec                |
+| tecnologico        |
+| tecnologico1       |
+| world              |
++--------------------+
+11 rows in set (0.0016 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > \use tecnologico1
+Default schema set to `tecnologico1`.
+Fetching table and column names from `tecnologico1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > show tables;
++------------------------+
+| Tables_in_tecnologico1 |
++------------------------+
+| alumnos                |
+| calificaciones         |
+| carreras               |
+| directorio             |
+| docente                |
+| empleado_soporte       |
+| materias               |
++------------------------+
+7 rows in set (0.0026 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| Alumno           |
+| Director         |
+| Jefe_depa        |
+| Maestro          |
+| Secretaria       |
+| total_user       |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| solo_tabla       |
+| total_user       |
++------------------+
+12 rows in set (0.0525 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Mestro'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.2635 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Creata user 'Alumno'@'127.0.0.3' identified by '1234';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Creata user 'Alumno'@'127.0.0.3' identified by '1234'' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Alumno'@'127.0.0.3' identified by '1234';
+ERROR: 1396 (HY000): Operation CREATE USER failed for 'Alumno'@'127.0.0.3'
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1090 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1162 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Mestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1332 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.0804 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1348 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > drop user 'Secretaria'@'127.0.0.3';
+Query OK, 0 rows affected (0.1005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Alumno'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1550 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Maestro'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1931 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Jefe_depa'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1403 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Director'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1578 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Create user 'Admin'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1173 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Grant all tecnologico1.Alumno to 'Alumno'@'127.0.0.3';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tecnologico1.Alumno to 'Alumno'@'127.0.0.3'' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > Grant all tecnologico1.Alumnos to 'Alumno'@'127.0.0.3';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tecnologico1.Alumnos to 'Alumno'@'127.0.0.3'' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > grant all on tecnologico1.alumnos to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1733 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > grant all on tecnologico1.horario to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1766 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > grant all on tecnologico1.calificaciones to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1983 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > grant all on tecnologico1.maestro to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.0975 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| eva_1              |
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| tec                |
+| tecnologico        |
+| tecnologico1       |
+| tecnologico2       |
+| world              |
++--------------------+
+12 rows in set (0.0014 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico1  SQL > \use tecnologico2
+Default schema set to `tecnologico2`.
+Fetching table and column names from `tecnologico2` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > show tables;
++------------------------+
+| Tables_in_tecnologico2 |
++------------------------+
+| alumnos                |
+| calificaciones         |
+| carreras               |
+| directorio             |
+| docente                |
+| empleado_soporte       |
+| horario                |
+| materias               |
++------------------------+
+8 rows in set (0.0025 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > drop user 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1686 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > drop user 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1703 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > drop user 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1816 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > drop user 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1018 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > drop user 'Admin'@'127.0.0.3';
+Query OK, 0 rows affected (0.1640 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > Create user 'Alumno'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1581 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > Create user 'Maestro'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1812 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > Create user 'Director'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.0858 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > Create user 'Jefe_depa'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1527 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > create user 'Admin'@'127.0.0.3' identified by '1234';
+Query OK, 0 rows affected (0.1793 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.alumnos to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1529 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.horario to 'Alumno'@'127.0.0.3';
+Query OK, 0 rows affected (0.1796 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.calificaciones to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1252 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.horario to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1304 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.docente to 'Maestro'@'127.0.0.3';
+Query OK, 0 rows affected (0.1078 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.empleado_soporte to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1845 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.docente to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1368 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.carreras to 'Director'@'127.0.0.3';
+Query OK, 0 rows affected (0.1008 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.carreras to 'Jefa_depa'@'127.0.0.3';
+ERROR: 1410 (42000): You are not allowed to create a user with GRANT
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.empleado_soporte to 'Jefa_depa'@'127.0.0.3';
+ERROR: 1410 (42000): You are not allowed to create a user with GRANT
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.empleado_soporte to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1094 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.docente to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1388 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.horario to 'Jefe_depa'@'127.0.0.3';
+Query OK, 0 rows affected (0.1585 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > grant all on tecnologico2.* to 'Admin'@'127.0.0.3';
+Query OK, 0 rows affected (0.1849 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL >
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 71
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico2;
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'tecnologico2;'
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico2
+Default schema set to `tecnologico2`.
+Fetching table and column names from `tecnologico2` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > show tables;
++------------------------+
+| Tables_in_tecnologico2 |
++------------------------+
+| alumnos                |
+| calificaciones         |
+| carreras               |
+| directorio             |
+| docente                |
+| empleado_soporte       |
+| horario                |
+| materias               |
++------------------------+
+8 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > desc directorio;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Nombre       | varchar(70) | YES  |     | NULL    |       |
+| No_Tel       | varchar(10) | YES  |     | NULL    |       |
+| Departamento | varchar(70) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento)
+                                            ... values('Conmutador','442-50-00' null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'null)' at line 2
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values('Conmutador','442-50-00,' null);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'null)' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values('Conmutador','442-50-00,' 'null');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values('Conmutador','4425000,' 'null');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > alter table directorio modify (No_Tel) Tel varchar(20);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(No_Tel) Tel varchar(20)' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > alter table directorio modify No_Tel varchar(20);
+Query OK, 0 rows affected (0.1113 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values('Conmutador','4425000,' ' ');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > desc directorio;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Nombre       | varchar(70) | YES  |     | NULL    |       |
+| No_Tel       | varchar(20) | YES  |     | NULL    |       |
+| Departamento | varchar(70) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0021 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values(
+                                            ... 'Conmutador', '442-50-00', '  ');
+Query OK, 1 row affected (0.0564 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( '', '442-50-00', '  ');                     insert into directorio(Nombre, No_Tel, Departamento) values( '', '4insert into directorio(Nombre, No_Tel, Departam, '442-50-00', '  ');;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''442-50-00', '  ')' at line 1
+
+                                            ... ;
+ERROR: 1065 (42000): Query was empty
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'Lic. Gabriel Salazar Hernandez', '442-50-00', '  ');
+Query OK, 1 row affected (0.1256 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > delete * from directorio;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from directorio' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > delete from directorio;
+Query OK, 2 rows affected (0.1028 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'COMUTADOR', '442-50-00', '  ');
+Query OK, 1 row affected (0.0853 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'COMUTADOR', '442-50-00', '  ')
+                                            ... ;
+Query OK, 1 row affected (0.0786 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > delete from directorio;
+Query OK, 2 rows affected (0.0130 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'COMUTADOR', '442-50-00', '  ') ;
+Query OK, 1 row affected (0.0343 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'LIC. GABRIEL SALAZAR HERNADEZ', '442-50-00'.
+                                            ... 'DIRECTOR DEL TECNOLOGICO);
+                                            ... ;
+                                            ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.
+'DIRECTOR DEL TECNOLOGICO);
+)' at line 1
+
+                                            ... insert into directorio(Nombre, No_Tel, Departamento) values( 'COMUTADOR', '442-50-00', '  ') ;
+Query OK, 1 row affected (0.0728 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > DELETE FROM DIRECTORIO;
+Query OK, 2 rows affected (0.0436 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'COMUTADOR', '442-50-00', '  ') ;
+Query OK, 1 row affected (0.0121 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'DRA. LUISA YOLANDA QUINONES MONTENEGRO', '442-50-11', 'JEFA DE DEPTO DE PLANEACION, PROGRAMACION PRESUPESTACION');rt into directorio(Nombre, No_Tel, Departamento) values( 'DRA. LUISA YOLANDA QUINONES MONTENEGRO', '442-50-11', 'JEFA ')
+Query OK, 1 row affected (0.0462 sec)           insert into directorio(Nombre, No_Tel, Departamento) values( 'L.S.C.A. MARGARITA RAMIREZ CHONG', '442-50-44', 'JEFA DE DEPTO GESTION TECNOLOGICA Y VINCULACION');           insert into directorio(Nombre, No_Tel, Departamento) values( 'L.S.C.A. MARGARITA RAMIREZ CHONG', '442-50-44', 'JEFA DE DE');
+Query OK, 1 row affected (0.0856 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.S.C.A. MARGARITA RAMIREZ CHONG', '442-50-44', 'JEFE DEPTO');
+                           .0328 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.S.C', '442-50-13', 'JEFE DEPTO ACTIVIDADES EXTRAESCOLARES');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.S.A', '442-50-13', 'JEFE DEPTO ACTIVIDADES EXTRAESCOLARES');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.E.F', '442-50-13', 'JEFE DEPTO ACTIVIDADES EXTRAESCOLARES');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.A.R.H. JAQUELINE HERNANDEZ RASCON', '442-50-16', 'JEFA DE DEPTO COMUNICACION Y DIFUSION');
+Query OK, 1 row affected (0.0998 sec)           insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. SILVIA NOLASCO CARDONA', '442-50-09', 'JEFA DE SERVICIOS ESCOLARES');NFORMACION');                       insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. SILVIA NOLASCO CARDONA', '442-50-09', 'JEFA DE SERVICIO')
+Query OK, 1 row affected (0.1500 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. SILVIA NOLASCO CARDONA', '442-50-09', 'JEFA DE DEPTO CE')
+                                                insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. SIL', '442-50-26', 'JEFA DE DEPTO CENTRO DE INFORMACION')
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'M.S.E. L', '442-50-26', 'JEFA DE DEPTO CENTRO DE INFORMACION')
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > SELECT*FROM DIRECTORIO;
++------------------------------------------+-----------+----------------------------------------------------------+
+| Nombre                                   | No_Tel    | Departamento                                             |
++------------------------------------------+-----------+----------------------------------------------------------+
+| COMUTADOR                                | 442-50-00 |                                                          |
+| LIC. GABRIEL SALAZAR HERNANDEZ           | 442-50-00 | DIRECTOR DEL TECNOLOGICO                                 |
+| DRA. LUISA YOLANDA QUINONES MONTENEGRO   | 442-50-11 | JEFA DE DEPTO DE PLANEACION, PROGRAMACION PRESUPESTACION |
+| L.E.F. FRANCISCO JAVIER ALEMAN ESCALANTE | 442-50-13 | JEFE DEPTO ACTIVIDADES EXTRAESCOLARES                    |
+| L.S.C.A. MARGARITA RAMIREZ CHONG         | 442-50-44 | JEFA DE DEPTO GESTION TECNOLOGICA Y VINCULACION          |
+| L.A.R.H. JAQUELINE HERNANDEZ RASCON      | 442insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GERARDO CENICEROS REYES', '442-50-03', 'SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS');CARRASCO         | 442insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GERARDO CENICEROS REYES', '442-50-03', 'SUBDIRECTOR DE');
+Query OK, 1 row affected (0.0465 sec)      | 442insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GERARDO CENICEROS REYES', '442-50-03', 'JEFA DE SERVIC');
+             ------------------------------+----insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GERARDO CE', '442-50-09', 'JEFA DE SERVICIOS ESCOLARES');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C.P. CINTHYA PAOLA ARANDA GOMEZ', '442-50-19', 'JEFA DEPTO DE SERVICIOS FINANCIEROS');sl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C.P. CINTHYA PAOLA ARANDA GOMEZ', '442-50-19', 'JEFA DEPTO ');
+Query OK, 1 row affected (0.0381 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C.P. CINTHYA PAOLA ARANDA GOMEZ', '442-50-19', 'SUBDIRECTOR');
+                             ecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C.', '442-50-03', 'SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C-', '442-50-03', 'SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'C-', '442-50-03', 'SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'IN', '442-50-03', 'SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL >
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'M.A.R.H AMALIA DELIA MENDINA TARIN', '442-50-10', 'JEFA DEPTO DE RECURSOS HUMANOS');      tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'M.A.R.H', '442-50-19', 'JEFA DEPTO DE SERVICIOS FINANCIEROS');
+Query OK, 1 row affected (0.0618 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'L.R.I. MANUEL CAMPOS SANDOVAL', '442-50-22', 'JEFE DEPTO DE RECURSOS MATERIALES Y SERVICIO GENERAL');         insert into directorio(Nombre, No_Tel, Departamento) values( 'L.R.I. MANUE', '442-50-10', 'JEFA DEPTO DE RECURSOS HUMANOS');
+Query OK, 1 row affected (0.0851 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'M.A.R.H AMAL', '442-50-10', 'JEFA DEPTO DE RECURSOS HUMANOS');
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'AR. ARMANDO SERRANO SALOMON', '442-50-18', 'SUBDIRECTOR ACADEMICO');O DE COMPUTO');                           insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOSE MANUEL AMEZQUITA MADRID', '442-50-12', 'JEFE DEPTO DE DIVISION DE ESTUDIOS');(0.0457 sec)           insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOSE MANUEL AMEZQUITA MADRID', '442-50-12', 'JEFE DEPT');
+Query OK, 1 row affected (0.0381 sec)           insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOSE MANUEL AMEZQUITA MADRID', '442-50-12', 'SUBDIRECT');
+            lhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOSE MANUEL AMES', '442-50-18', 'SUBDIRECTOR ACADEMICO');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'AR. ARMANDO SERRANO S', '442-50-18', 'SUBDIRECTOR ACADEMICO');
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. ALEXIS ALFREDO SAENZ ARAGONES', '442-50-29', 'JEFE DEPTO DE SERVICIO ECONOMICO ADMINISTRATIVO');2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. ALE', '442-50-12', 'JEFE DEPTO DE DIVISION DE ESTUDIOS');
+Query OK, 1 row affected (0.0947 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOS', '442-50-12', 'JEFE DEPTO DE DIVISION DE ESTUDIOS');
+                                                insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GEGORIO RONQULLO MAYNEZ', '442-50-24', 'JEFE DEPTO DE SISTEMAS Y COMPUTACION'); ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. GEGORIO RONQULLO MAYNEZ', '442-50-24', 'JEFE DEPTO DE ');
+Query OK, 1 row affected (0.0686 sec)           insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. JOSE LUIS GARCIA ESPARZA', '442-50-23', 'JEFE DEPTO DE ING INDUSTRIAL');                                 insert into directorio(Nombre, No_Tel, Departamento) values( 'ING. J', '442-50-24', 'JEFE DEPTO DE SISTEMAS Y COMPUTACION');
+Query OK, 1 row affected (0.1176 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'N.G MARIA ELENA MARTINEZ CASTELLANOS', '442-50-17', 'JEFA DEPTO DE DESARROLLO ACADEMICO');                    insert into directorio(Nombre, No_Tel, Departamento) values( 'N.G MARIA ELEN', '442-50-23', 'JEFE DEPTO DE ING INDUSTRIAL');
+Query OK, 1 row affected (0.0500 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'LIC. OLGA REBECA CASTILLO CRUZ', '442-50-32', 'JEFA DE LA DIVISION DE ESTUDIOS DE POSGRDOS E INVESTIGACION'); insert into directorio(Nombre, No_Tel, Departamento) values( 'LIC. OLGA REBECA CASTILLO CRUZ', '442-50-32', 'JEFA DE LA D');
+Query OK, 1 row affected (0.0487 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'LIC. OLGA REBECA CASTILLO CRUZ', '442-50-32', 'JEFA DEPTO D');
+                                                insert into directorio(Nombre, No_Tel, Departamento) values( 'ARQ. CESAR CAPISTRAN', '442-50-28', 'JEFE DEPTO DE CIENCIAS DE LA TIERRA');host:3306 ssl  tecnologico2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ARQ. CESAR CAPISTRAN', '442-50-28', 'JEFE DEPTO DE CIENCIAS');
+Query OK, 1 row affected (0.0496 sec)co2  SQL > insert into directorio(Nombre, No_Tel, Departamento) values( 'ARQ. CESAR CAPISTRAN', '442-50-28', 'JEFA DE LA DIVISION DE');
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL > SELECT *FROM DIRECTORIO;
++------------------------------------------+-----------+-------------------------------------------------------------+
+| Nombre                                   | No_Tel    | Departamento                                                |
++------------------------------------------+-----------+-------------------------------------------------------------+
+| COMUTADOR                                | 442-50-00 |                                                             |
+| LIC. GABRIEL SALAZAR HERNANDEZ           | 442-50-00 | DIRECTOR DEL TECNOLOGICO                                    |
+| DRA. LUISA YOLANDA QUINONES MONTENEGRO   | 442-50-11 | JEFA DE DEPTO DE PLANEACION, PROGRAMACION PRESUPESTACION    |
+| L.E.F. FRANCISCO JAVIER ALEMAN ESCALANTE | 442-50-13 | JEFE DEPTO ACTIVIDADES EXTRAESCOLARES                       |
+| L.S.C.A. MARGARITA RAMIREZ CHONG         | 442-50-44 | JEFA DE DEPTO GESTION TECNOLOGICA Y VINCULACION             |
+| L.A.R.H. JAQUELINE HERNANDEZ RASCON      | 442-50-16 | JEFA DE DEPTO COMUNICACION Y DIFUSION                       |
+| M.S.E. LUZ MARIA ZAPATA CARRASCO         | 442-50-26 | JEFA DE DEPTO CENTRO DE INFORMACION                         |
+| ING. SILVIA NOLASCO CARDONA              | 442-50-09 | JEFA DE SERVICIOS ESCOLARES                                 |
+| ING. GERARDO CENICEROS REYES             | 442-50-03 | SUBDIRECTOR DE SERVICIOS ADMINISTRATIVOS                    |
+| C.P. CINTHYA PAOLA ARANDA GOMEZ          | 442-50-19 | JEFA DEPTO DE SERVICIOS FINANCIEROS                         |
+| M.A.R.H AMALIA DELIA MENDINA TARIN       | 442-50-10 | JEFA DEPTO DE RECURSOS HUMANOS                              |
+| L.R.I. MANUEL CAMPOS SANDOVAL            | 442-50-22 | JEFE DEPTO DE RECURSOS MATERIALES Y SERVICIO GENERAL        |
+| ING. FERNANDO DE LA ROSA FIERROS         | 442-50-07 | JEFE DEPTO DE CENTRO DE COMPUTO                             |
+| AR. ARMANDO SERRANO SALOMON              | 442-50-18 | SUBDIRECTOR ACADEMICO                                       |
+| ING. JOSE MANUEL AMEZQUITA MADRID        | 442-50-12 | JEFE DEPTO DE DIVISION DE ESTUDIOS                          |
+| ING. ALEXIS ALFREDO SAENZ ARAGONES       | 442-50-29 | JEFE DEPTO DE SERVICIO ECONOMICO ADMINISTRATIVO             |
+| ING. GEGORIO RONQULLO MAYNEZ             | 442-50-24 | JEFE DEPTO DE SISTEMAS Y COMPUTACION                        |
+| ING. JOSE LUIS GARCIA ESPARZA            | 442-50-23 | JEFE DEPTO DE ING INDUSTRIAL                                |
+| N.G MARIA ELENA MARTINEZ CASTELLANOS     | 442-50-17 | JEFA DEPTO DE DESARROLLO ACADEMICO                          |
+| ING. ALBERTO GUERRO BARRAZA ALVAREZ      | 442-50-21 | JEFE DEPTO DE CIENCIAS BASICAS                              |
+| LIC. OLGA REBECA CASTILLO CRUZ           | 442-50-32 | JEFA DE LA DIVISION DE ESTUDIOS DE POSGRDOS E INVESTIGACION |
+| ARQ. CESAR CAPISTRAN                     | 442-50-28 | JEFE DEPTO DE CIENCIAS DE LA TIERRA                         |
++------------------------------------------+-----------+-------------------------------------------------------------+
+22 rows in set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico2  SQL >
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 44
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico;
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'tecnologico;'
+
+ MySQL  localhost:3306 ssl  SQL > \use tecnologico
+Default schema set to `tecnologico`.
+Fetching table and column names from `tecnologico` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos
+                                           ... ;
+Empty set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                          | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                   | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Carrera         | int(11)                                                       | YES  | MUL | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                   | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                   | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                   | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0022 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos
+                                           ... values(16550480,'Alonso','Parra','Espinoza','ISC',5,'Eucalipto','4135894','6143709412');
+ERROR: 1366 (HY000): Incorrect integer value: 'ISC' for column 'Carrera' at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos values(16550480,'Alonso','Parra','Espinoza',2,5,'Eucalipto','4135894','6143709412');
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`tecnologico`.`alumnos`, CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`Carrera`) REFERENCES `carreras` (`no_carrera`))
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos values(16550480,'Alonso','Parra','Espinoza',2,'5','Eucalipto','4135894','6143709412');
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`tecnologico`.`alumnos`, CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`Carrera`) REFERENCES `carreras` (`no_carrera`))
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc tables;
+ERROR: 1146 (42S02): Table 'tecnologico.tables' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                          | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                   | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Carrera         | int(11)                                                       | YES  | MUL | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                   | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                   | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                   | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0016 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos
+                                           ... No_Crtl values(16550480)
+                                           ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'No_Crtl values(16550480)' at line 2
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (No_Crtl) values(16550480) ;
+ERROR: 1364 (HY000): Field 'Nombre' doesn't have a default value
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (No_Crtl) values('Alonso') ;
+ERROR: 1366 (HY000): Incorrect integer value: 'Alonso' for column 'No_Crtl' at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (No_Crtl) values(16550481);
+ERROR: 1364 (HY000): Field 'Nombre' doesn't have a default value
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (No_Crtl, Nombre) values(16550481,'Alonso');
+Query OK, 1 row affected (0.1259 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos;
++----------+--------+--------------+--------------+---------+-----------------+-----------+------+------+
+| No_Crtl  | Nombre | Apellido_Pat | Apellido_Mat | Carrera | Semestre_actual | Direccion | Tel  | Cel  |
++----------+--------+--------------+--------------+---------+-----------------+-----------+------+------+
+| 16550481 | Alonso | NULL         | NULL         |    NULL | NULL            | NULL      | NULL | NULL |
++----------+--------+--------------+--------------+---------+-----------------+-----------+------+------+
+1 row in set (0.0005 sec)
+                                               insert into alumnos (No_Crtl, Nombre, Apellido_Pat, Apellido_Mat, Carrera, Semestre_actual, Direccion, Tel, Cel) values(16550481,'Alonso','Parra','Espinoza',5,
+                                           ... insert into alumnos (No_Crtl, Nombre, Apellido_Pat, Apellido_Mat, Carrera, Semestre_actual, Direccion, Tel, Cel) values(16550481,'Alonso','Parra','Espinoza',5,'5');
+                                           ... '5','Eucalipto;
+                                           ... show tables;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''Eucalipto;
+show tables' at line 2
+
+                                           ... insert into alumnos (No_Crtl, Nombre, Apellido_Pat, Apellido_Mat, Carrera, Semestre_actual, Direccion, Tel, Cel)
+                                           ... values(16550482, 'Benito','Saenz','Piedra',6,'3','Almedo','4893782','6149845621');
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`tecnologico`.`alumnos`, CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`Carrera`) REFERENCES `carreras` (`no_carrera`))
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (No_Crtl, Nombre, Apellido_Pat, Apellido_Mat, Semestre_actual, Direccion, Tel, Cel) values(16550482, 'Benito','Saenz','Piedra','3','Almedo','4893782','6149845621');
+Query OK, 1 row affected (0.1890 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from materias;
+Empty set (0.0688 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos;
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| No_Crtl  | Nombre | Apellido_Pat | Apellido_Mat | Carrera | Semestre_actual | Direccion | Tel     | Cel        |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| 16550481 | Alonso | NULL         | NULL         |    NULL | NULL            | NULL      | NULL    | NULL       |
+| 16550482 | Benito | Saenz        | Piedra       |    NULL | 3               | Almedo    | 4893782 | 6149845621 |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+2 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from carrera;
+ERROR: 1146 (42S02): Table 'tecnologico.carrera' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc carrera;
+ERROR: 1146 (42S02): Table 'tecnologico.carrera' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumno;
+ERROR: 1146 (42S02): Table 'tecnologico.alumno' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumno
+                                           ... ;
+ERROR: 1146 (42S02): Table 'tecnologico.alumno' doesn't exist
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos;
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| No_Crtl  | Nombre | Apellido_Pat | Apellido_Mat | Carrera | Semestre_actual | Direccion | Tel     | Cel        |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| 16550481 | Alonso | NULL         | NULL         |    NULL | NULL            | NULL      | NULL    | NULL       |
+| 16550482 | Benito | Saenz        | Piedra       |    NULL | 3               | Almedo    | 4893782 | 6149845621 |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+2 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc carreras;
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                                      | Null | Key | Default | Extra          |
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_Carrera   | int(11)                                                                   | NO   | PRI | NULL    | auto_increment |
+| No_Materia   | int(11)                                                                   | YES  |     | NULL    |                |
+| No_Sementres | int(11)                                                                   | YES  |     | NULL    |                |
+| Nombre       | enum('I.S.C','I.D.I','I.I','I.G.E','I.F','Administracion','Arquitectura') | YES  |     | NULL    |                |
++--------------+---------------------------------------------------------------------------+------+-----+---------+----------------+
+4 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Semestres, Nombre)
+                                           ... values(6,9,'I.S.C');
+ERROR: 1054 (42S22): Unknown column 'No_Semestres' in 'field list'
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(6,9,'I.S.C');
+Query OK, 1 row affected (0.1784 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from carreras;
++------------+------------+--------------+--------+
+| No_Carrera | No_Materia | No_Sementres | Nombre |
++------------+------------+--------------+--------+
+|          1 |          6 |            9 | I.S.C  |
++------------+------------+--------------+--------+
+1 row in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(7,8,'I.D.I');
+Query OK, 1 row affected (0.1479 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from carreras;
++------------+------------+--------------+--------+
+| No_Carrera | No_Materia | No_Sementres | Nombre |
++------------+------------+--------------+--------+
+|          1 |          6 |            9 | I.S.C  |
+|          2 |          7 |            8 | I.D.I  |
++------------+------------+--------------+--------+
+2 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(5,10,'I.I');
+Query OK, 1 row affected (0.1956 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(9,9,'I.G.E');
+Query OK, 1 row affected (0.1478 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(7,7,'I.F');
+Query OK, 1 row affected (0.1376 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(4,5,'Administracion');
+Query OK, 1 row affected (0.1418 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into carreras (No_Materia, No_Sementres, Nombre) values(5,7,'Arquitectura');
+Query OK, 1 row affected (0.1647 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from carreras;
++------------+------------+--------------+----------------+
+| No_Carrera | No_Materia | No_Sementres | Nombre         |
++------------+------------+--------------+----------------+
+|          1 |          6 |            9 | I.S.C          |
+|          2 |          7 |            8 | I.D.I          |
+|          3 |          5 |           10 | I.I            |
+|          4 |          9 |            9 | I.G.E          |
+|          5 |          7 |            7 | I.F            |
+|          6 |          4 |            5 | Administracion |
+|          7 |          5 |            7 | Arquitectura   |
++------------+------------+--------------+----------------+
+7 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc calificaciones;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| No_Ctrl     | int(11) | NO   | MUL | NULL    |       |
+| No_Materia  | int(11) | YES  | MUL | NULL    |       |
+| Calif       | float   | YES  |     | NULL    |       |
+| No_Empleado | int(11) | YES  | MUL | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+4 rows in set (0.0022 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc directorio;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Nombre       | varchar(70) | YES  |     | NULL    |       |
+| No_Tel       | varchar(10) | YES  |     | NULL    |       |
+| Departamento | varchar(70) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.0024 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into directorio (Nombre, No_Tel, Departamento)
+                                           ... values(;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from directorio;
+Empty set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into directorio (Nombre, No_Tel, Departamento) values(
+                                           ... 'Dra. Luisa Yolanda Quiónez Montenegro','442-50-11','Jefa del depto de planeación, programación y presupuesto');
+Query OK, 1 row affected (0.1860 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from directorio;
+MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos;
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| No_Crtl  | Nombre | Apellido_Pat | Apellido_Mat | Carrera | Semestre_actual | Direccion | Tel     | Cel        |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| 16550481 | Alonso | NULL         | NULL         |    NULL | NULL            | NULL      | NULL    | NULL       |
+| 16550482 | Benito | Saenz        | Piedra       |    NULL | 3               | Almedo    | 4893782 | 6149845621 |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+2 rows in set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from calificaciones;
+Empty set (0.0440 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc calificaciones;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| No_Ctrl     | int(11) | NO   | MUL | NULL    |       |
+| No_Materia  | int(11) | YES  | MUL | NULL    |       |
+| Calif       | float   | YES  |     | NULL    |       |
+| No_Empleado | int(11) | YES  | MUL | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+4 rows in set (0.0020 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into calificaciones (No_Ctrl, No_Materia, Calif, No_Empleado)
+                                           ... values(16550490,7,10,1);
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`tecnologico`.`calificaciones`, CONSTRAINT `No_Control` FOREIGN KEY (`No_Ctrl`) REFERENCES `alumnos` (`no_crtl`))
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into calificaciones (No_Ctrl, No_Materia, Calif, No_Empleado) values(16550481,7,10,1);
+ERROR: 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`tecnologico`.`calificaciones`, CONSTRAINT `No_Empleado` FOREIGN KEY (`No_Empleado`) REFERENCES `empleados` (`no_empleado`))
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc empleado_soporte
+                                           ... ;
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field            | Type                                                                                                                                                                                                                                                                                                                                | Null | Key | Default | Extra          |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_Empleado      | int(11)                                                                                                                                                                                                                                                                                                                             | NO   | PRI | NULL    | auto_increment |
+| Nombre           | varchar(50)                                                                                                                                                                                                                                                                                                                         | NO   |     | NULL    |                |
+| Apellido_Pat     | varchar(50)                                                                                                                                                                                                                                                                                                                         | YES  |     | NULL    |                |
+| Apellido_Mat     | varchar(50)                                                                                                                                                                                                                                                                                                                         | YES  |     | NULL    |                |
+| Direccion        | varchar(100)                                                                                                                                                                                                                                                                                                                        | YES  |     | NULL    |                |
+| No_plazas        | int(11)                                                                                                                                                                                                                                                                                                                             | YES  |     | NULL    |                |
+| Hr_Trabajo       | int(11)                                                                                                                                                                                                                                                                                                                             | YES  |     | NULL    |                |
+| Departamento     | enum('Division de estudios','Recursos Humanos','Financieros','Servicios Escolares','Centro de Informacion','Centro de Computo','Comunicacion y Difusion','Mantenimiento','Gestion Tecnologica y Vinculacion','Actividades Extraescolares','Planeacion, programacion y presupuestacion','Recursos Materiales y Servicios Generales') | YES  |     | NULL    |                |
+| Carrera          | varchar(100)                                                                                                                                                                                                                                                                                                                        | YES  |     | NULL    |                |
+| Posgrado         | enum('Maestria','Doctorado')                                                                                                                                                                                                                                                                                                        | YES  |     | NULL    |                |
+| Email            | varchar(50)                                                                                                                                                                                                                                                                                                                         | YES  |     | NULL    |                |
+| Fecha_Nacimiento | date                                                                                                                                                                                                                                                                                                                                | YES  |     | NULL    |                |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+12 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from empleado_soporte;
+Empty set (0.0021 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into empleado_soporte (No_Empleado, Nombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento)
+                                           ... values(;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+                                               insert into empleado_soporte (Nombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento)
+                                           ...   sert into empleado_soporte (No_EmplNombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento) values(;
+                                           ... values('Alan','Rodriguez','López','Calle Sonora',12,8,'División de estudios','I.S.C','Maestria','sexyboy@hotmail.com','2017-09-10');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into empleado_soporte (Nombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento) values('Alan','Rodriguez','López','Calle Sonora',12,8,'División de estudios','I.S.C','Maestria','sexyboy@hotmail.com','2017-09-10');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into empleado_soporte (No_Empleado, Nombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento) values(1,'Alan','Rodriguez','López','Calle Sonora',12,8,'División de estudios','I.S.C','Maestria','sexyboy@hotmail.com','2017-09-10');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > ;nsert into empleado_soporte (No_Empleado, Nombre, Apellido_Pat, Apellido_Mat, Direccion, No_plazas, Hr_Trabajo, Departamento, Posgrado, Email, Fecha_Nacimiento) va
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0022 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into empleado_soporte (Nombre) values('Leopoldo');
+Query OK, 1 row affected (0.2118 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert update into empleado_soporte (Nombre, Apellido_Pat) values('Leopoldo','Morrales');
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'update into empleado_soporte (Nombre, Apellido_Pat) values('Leopoldo','Morrales'' at line 1
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from empleado_soporte;
++-------------+----------+--------------+--------------+-----------+-----------+------------+--------------+---------+----------+-------+------------------+
+| No_Empleado | Nombre   | Apellido_Pat | Apellido_Mat | Direccion | No_plazas | Hr_Trabajo | Departamento | Carrera | Posgrado | Email | Fecha_Nacimiento |
++-------------+----------+--------------+--------------+-----------+-----------+------------+--------------+---------+----------+-------+------------------+
+|           1 | Leopoldo | NULL         | NULL         | NULL      |      NULL |       NULL | NULL         | NULL    | NULL     | NULL  | NULL             |
++-------------+----------+--------------+--------------+-----------+-----------+------------+--------------+---------+----------+-------+------------------+
+1 row in set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from docente;
+Empty set (0.0300 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc docente;
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field            | Type                                                                                                                                                                          | Null | Key | Default | Extra          |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+| No_docente       | int(11)                                                                                                                                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre           | varchar(50)                                                                                                                                                                   | NO   |     | NULL    |                |
+| Apellido_Pat     | varchar(50)                                                                                                                                                                   | YES  |     | NULL    |                |
+| Apellido_Mat     | varchar(50)                                                                                                                                                                   | YES  |     | NULL    |                |
+| Direccion        | varchar(100)                                                                                                                                                                  | YES  |     | NULL    |                |
+| No_plazas        | int(11)                                                                                                                                                                       | YES  |     | NULL    |                |
+| Hr_Trabajo       | int(11)                                                                                                                                                                       | YES  |     | NULL    |                |
+| Departamento     | enum('Sistemas y Computacion','Ciencias Basicas','Ingenieria Industrial','Ciencias de la Tierra','Estudios de posgrado e investigacion','Ciencias Economico Administrativas') | YES  |     | NULL    |                |
+| Carrera          | varchar(100)                                                                                                                                                                  | YES  |     | NULL    |                |
+| Posgrado         | enum('Maestria','Doctorado')                                                                                                                                                  | YES  |     | NULL    |                |
+| Email            | varchar(50)                                                                                                                                                                   | YES  |     | NULL    |                |
+| Fecha_Nacimiento | date                                                                                                                                                                          | YES  |     | NULL    |                |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+----------------+
+12 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into docente( Nombre, Apellido_Pat, Apellido_Mat, Direccion,No_plazas, Hr_Trabajo, Departamento, Carrera, Posgrado, Email, Fecha_Nacimiento)
+                                           ... values('Antonio','López','De Santa Ana','Calle Monte Albán',4,8,'Sistemas y Computación','I.S.C','Doctorado','perrito1@hotmail.com','2017-08-22');
+Query OK, 1 row affected (0.1781 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into docente( Nombre, Apellido_Pat, Apellido_Mat, Direccion,No_plazas, Hr_Trabajo, Departamento, Carrera, Posgrado, Email, Fecha_Nacimiento) values('José','López','Ortiz','Calle Sicomoro',3,9,'Ciencias Basicas','I.S.C','Doctorado','profJos@hotmail.com','2015-05-15');
+Query OK, 1 row affected (0.1941 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into docente( Nombre, Apellido_Pat, Apellido_Mat, Direccion,No_plazas, Hr_Trabajo, Departamento, Carrera, Email, Fecha_Nacimiento) values('María','Parra','Rodriguez','Calle Velasquez de León',6,7,'Ciencias de la Tierra','Arquitectura','msMar@hotmail.com','2014-05-25');
+Query OK, 1 row affected (0.1847 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from docente;
++------------+---------+--------------+--------------+--------------------------+-----------+------------+------------------------+--------------+-----------+----------------------+------------------+
+| No_docente | Nombre  | Apellido_Pat | Apellido_Mat | Direccion                | No_plazas | Hr_Trabajo | Departamento           | Carrera      | Posgrado  | Email                | Fecha_Nacimiento |
++------------+---------+--------------+--------------+--------------------------+-----------+------------+------------------------+--------------+-----------+----------------------+------------------+
+|          1 | Antonio | L MySQL  localhost:3306 ssl  tecnologico  SQL >
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > show tables;
++-----------------------+
+| Tables_in_tecnologico |
++-----------------------+
+| alumnos               |
+| calificaciones        |
+| carreras              |
+| directorio            |
+| docente               |
+| empleado_soporte      |
+| horario               |
+| materias              |
++-----------------------+
+8 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from horario;
+Empty set (0.0020 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc horario;
++------------+-------------------------------------------------------+------+-----+---------+-------+
+| Field      | Type                                                  | Null | Key | Default | Extra |
++------------+-------------------------------------------------------+------+-----+---------+-------+
+| No_Ctrl    | int(11)                                               | YES  | MUL | NULL    |       |
+| No_Materia | int(11)                                               | YES  | MUL | NULL    |       |
+| No_docente | int(11)                                               | YES  | MUL | NULL    |       |
+| Hora       | time                                                  | YES  |     | NULL    |       |
+| Dias       | enum('Lunes','Martes','Miercoles','Jueves','Viernes') | YES  |     | NULL    |       |
++------------+-------------------------------------------------------+------+-----+---------+-------+
+5 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into horario values(16550481,7,1,10,'Lunes');
+Query OK, 1 row affected (0.2079 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into horario values(16550482,6,2,11,'Martes');
+Query OK, 1 row affected (0.1203 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into horario values(16550482,8,3,12,'Viernes');
+Query OK, 1 row affected (0.1658 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from materias;
+Empty set (0.0010 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc materias;
++--------------+---------+------+-----+---------+----------------+
+| Field        | Type    | Null | Key | Default | Extra          |
++--------------+---------+------+-----+---------+----------------+
+| No_Materia   | int(11) | NO   | PRI | NULL    | auto_increment |
+| Creditos     | int(11) | YES  |     | NULL    |                |
+| Hr_Teoricas  | int(11) | YES  |     | NULL    |                |
+| Hr_Practicas | int(11) | YES  |     | NULL    |                |
+| Semestre     | int(11) | YES  |     | NULL    |                |
++--------------+---------+------+-----+---------+----------------+
+5 rows in set (0.0022 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into materias (Creditos, Hr_Teoricas, Hr_Practicas, Semestre)
+                                           ... values(4,4,4,5);
+Query OK, 1 row affected (0.1506 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into materias (Creditos, Hr_Teoricas, Hr_Practicas, Semestre) values(5,3,4,4);
+Query OK, 1 row affected (0.1682 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into materias (Creditos, Hr_Teoricas, Hr_Practicas, Semestre) values(3,2,3,7);
+Query OK, 1 row affected (0.2876 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into materias (Creditos, Hr_Teoricas, Hr_Practicas, Semestre) values(5,4,3,9);
+Query OK, 1 row affected (0.1552 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > select * from alumnos;
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| No_Crtl  | Nombre | Apellido_Pat | Apellido_Mat | Carrera | Semestre_actual | Direccion | Tel     | Cel        |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+| 16550481 | Alonso | NULL         | NULL         |    NULL | NULL            | NULL      | NULL    | NULL       |
+| 16550482 | Benito | Saenz        | Piedra       |    NULL | 3               | Almedo    | 4893782 | 6149845621 |
++----------+--------+--------------+--------------+---------+-----------------+-----------+---------+------------+
+2 rows in set (0.0009 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > desc alumnos;
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| Field           | Type                                                          | Null | Key | Default | Extra          |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+| No_Crtl         | int(11)                                                       | NO   | PRI | NULL    | auto_increment |
+| Nombre          | varchar(50)                                                   | NO   |     | NULL    |                |
+| Apellido_Pat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Apellido_Mat    | varchar(50)                                                   | YES  |     | NULL    |                |
+| Carrera         | int(11)                                                       | YES  | MUL | NULL    |                |
+| Semestre_actual | enum('1','2','3','4','5','6','7','8','9','10','11','12','13') | YES  |     | NULL    |                |
+| Direccion       | varchar(50)                                                   | YES  |     | NULL    |                |
+| Tel             | varchar(10)                                                   | YES  |     | NULL    |                |
+| Cel             | varchar(10)                                                   | YES  |     | NULL    |                |
++-----------------+---------------------------------------------------------------+------+-----+---------+----------------+
+9 rows in set (0.0021 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (Nombre, Apellido_Pat, Apellido_Mat, Carrera, Semestre_actual, Direccion, Tel, Cel)
+                                           ... values('Jesús','Dominguez','Espinoza',1,'2','Av. Mirador','4893712','6149753145');
+Query OK, 1 row affected (0.1882 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL > insert into alumnos (Nombre, Apellido_Pat, Apellido_Mat, Carrera, Semestre_actual, Direccion, Tel, Cel) values('Roberto','Orozco','Chavez',2,'5','Calle Colegio militar','4459319','6146971305');
+Query OK, 1 row affected (0.1532 sec)
+
+ MySQL  localhost:3306 ssl  tecnologico  SQL >
+
